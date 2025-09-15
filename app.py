@@ -14,10 +14,10 @@ def main():
     login_page = st.Page("pages/login.py", title="Log in", icon=":material/login:")
     logout_page = st.Page("pages/logout.py", title="Log out", icon=":material/logout:")
 
-    dashboard_page = st.Page(
-        "pages/dashboard.py",
-        title="Dashboard",
-        icon=":material/dashboard:",
+    summary_page = st.Page(
+        "pages/summary.py",
+        title="Summary",
+        icon=":material/person:",
         default=True,
     )
     bugs_page = st.Page(
@@ -38,7 +38,7 @@ def main():
         pg = st.navigation(
             {
                 "Account": [logout_page],
-                "Reports": [dashboard_page, bugs_page, alerts_page],
+                "Reports": [summary_page, bugs_page, alerts_page],
                 "Tools": [search_page, history_page],
             }
         )
