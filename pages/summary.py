@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 from utils import clean_data
+from plot import plot_summary_histogram, plot_summary_scatter
 
 
 def summary():
@@ -13,9 +13,29 @@ def summary():
     with st.expander("Marketing Data Dictionary"):
         st.dataframe(df_info)
 
+    st.write(df.dtypes)
+
+    # Plot scatter plot of two selected columns
+    selected_column_x = st.selectbox(
+        "Select a column to plot on the x-axis", df.columns, key="scatter_x"
+    )
+    selected_column_y = st.selectbox(
+        "Select a column to plot on the y-axis", df.columns, key="scatter_y"
+    )
+    selected_column_color = st.selectbox(
+        "Select a column to plot on the color", df.columns, key="scatter_color"
+    )
+    fig = plot_summary_scatter(df, selected_column_x, selected_column_y, selected_column_color)
+    st.plotly_chart(fig)
+
     # Plot histogram of selected column
-    selected_column = st.selectbox("Select a column to plot", df.columns)
-    fig = px.histogram(df, x=selected_column)
+    selected_column = st.selectbox(
+        "Select a column to plot", df.columns, key="histogram"
+    )
+    split_column = st.selectbox(
+        "Select a column to split by", df.columns, key="histogram_split"
+    )
+    fig = plot_summary_histogram(df, selected_column, split_column)
     st.plotly_chart(fig)
 
 
