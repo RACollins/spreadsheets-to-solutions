@@ -37,7 +37,7 @@ def login():
 
 
 def main():
-    left_margin, main_content, right_margin = st.columns([1, 5, 1])
+    left_margin, main_content, right_margin = st.columns([1, 1, 1])
     with main_content:
         st.image("data/assets/marketing-magic-high-resolution-logo-transparent.png")
         login()

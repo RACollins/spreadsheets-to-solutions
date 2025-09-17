@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from utils import clean_data
-from plot import plot_summary_histogram, plot_summary_scatter
+from plot import plot_summary_scatter, plot_corr_heatmap
 
 
 def summary():
@@ -13,29 +13,37 @@ def summary():
     with st.expander("Marketing Data Dictionary"):
         st.dataframe(df_info)
 
-    st.write(df.dtypes)
+    # Display DataFrame info safely without PyArrow serialization issues
+    dtypes_df = pd.DataFrame(
+        {
+            "Column": df.columns,
+            "Data Type": [str(dtype) for dtype in df.dtypes],
+            "Non-Null Count": [df[col].notna().sum() for col in df.columns],
+        }
+    )
+    with st.expander("Data Types"):
+        st.dataframe(dtypes_df)
 
     # Plot scatter plot of two selected columns
-    selected_column_x = st.selectbox(
-        "Select a column to plot on the x-axis", df.columns, key="scatter_x"
+    # get only category columns
+    cat_cols = [col for col in df.columns if df[col].dtype == "category"]
+    non_cat_cols = [col for col in df.columns if df[col].dtype != "category"]
+
+    left_column, middle_column, right_column = st.columns([1, 1, 1])
+    with left_column:
+        selected_column_x = st.selectbox("X", non_cat_cols, key="scatter_x")
+    with middle_column:
+        selected_column_y = st.selectbox("Y", non_cat_cols, key="scatter_y")
+    with right_column:
+        selected_column_color = st.selectbox("Colour", cat_cols, key="scatter_color")
+    fig = plot_summary_scatter(
+        df, selected_column_x, selected_column_y, selected_column_color
     )
-    selected_column_y = st.selectbox(
-        "Select a column to plot on the y-axis", df.columns, key="scatter_y"
-    )
-    selected_column_color = st.selectbox(
-        "Select a column to plot on the color", df.columns, key="scatter_color"
-    )
-    fig = plot_summary_scatter(df, selected_column_x, selected_column_y, selected_column_color)
     st.plotly_chart(fig)
 
-    # Plot histogram of selected column
-    selected_column = st.selectbox(
-        "Select a column to plot", df.columns, key="histogram"
-    )
-    split_column = st.selectbox(
-        "Select a column to split by", df.columns, key="histogram_split"
-    )
-    fig = plot_summary_histogram(df, selected_column, split_column)
+    # Plot correlations between all columns
+    corr_df = df[non_cat_cols].corr()
+    fig = plot_corr_heatmap(corr_df)
     st.plotly_chart(fig)
 
 

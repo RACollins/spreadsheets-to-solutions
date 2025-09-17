@@ -1,5 +1,10 @@
 import streamlit as st
 
+page_config = st.set_page_config(
+    layout="wide",
+    initial_sidebar_state="auto",
+)
+
 
 def main():
     """Main function to run the app."""
