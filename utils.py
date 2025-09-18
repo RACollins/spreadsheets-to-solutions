@@ -36,4 +36,57 @@ def clean_data(df):
         if col in df.columns:
             df[col] = df[col].astype("category")
 
+    # Add total amount spent on all purchases
+    MntCols = [
+        "MntWines",
+        "MntFruits",
+        "MntMeatProducts",
+        "MntFishProducts",
+        "MntSweetProducts",
+        "MntGoldProds",
+    ]
+    df["MntTotal"] = df[MntCols].sum(axis=1)
+
+    # Add total number of purchases
+    NumCols = [
+        "NumWebVisitsMonth",
+        "NumCatalogPurchases",
+        "NumStorePurchases",
+    ]
+    df["NumTotal"] = df[NumCols].sum(axis=1)
+
+    # Add total campaign responses
+    CmpCols = [
+        "AcceptedCmp1",
+        "AcceptedCmp2",
+        "AcceptedCmp3",
+        "AcceptedCmp4",
+        "AcceptedCmp5",
+        "Response",
+    ]
+    # Convert boolean to integer
+    df["AcceptedCmpTotal"] = df[CmpCols].astype(int).sum(axis=1)
+
+    # Reorder columns
+    df = df[
+        [
+            "ID",
+            "Year_Birth",
+            "Dt_Customer",
+            "Education",
+            "Marital_Status",
+            "Kidhome",
+            "Teenhome",
+            "Recency",
+            "Income",
+        ]
+        + MntCols
+        + ["MntTotal"]
+        + NumCols
+        + ["NumTotal", "NumWebPurchases", "NumDealsPurchases"]
+        + CmpCols
+        + ["AcceptedCmpTotal"]
+        + ["Complain", "Country"]
+    ]
+
     return df
