@@ -1,9 +1,7 @@
 import plotly.express as px
 
 
-def plot_summary_scatter(
-    df, selected_column_x, selected_column_y, selected_column_color
-):
+def summary_scatter(df, selected_column_x, selected_column_y, selected_column_color):
     fig = px.scatter(
         df,
         x=selected_column_x,
@@ -16,7 +14,7 @@ def plot_summary_scatter(
     return fig
 
 
-def plot_corr_heatmap(corr_df):
+def corr_heatmap(corr_df):
     fig = px.imshow(
         corr_df.iloc[4:, 4:],
         labels=dict(x="X", y="Y", color="Correlation"),

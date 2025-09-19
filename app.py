@@ -19,32 +19,24 @@ def main():
     login_page = st.Page("pages/login.py", title="Log in", icon=":material/login:")
     logout_page = st.Page("pages/logout.py", title="Log out", icon=":material/logout:")
 
+    home_page = st.Page("pages/home.py", title="Home", icon=":material/home:")
+
     summary_page = st.Page(
         "pages/summary.py",
         title="Summary",
-        icon=":material/person:",
+        icon=":material/analytics:",
         default=True,
     )
     campaigns_page = st.Page(
         "pages/campaigns.py", title="Campaigns", icon=":material/campaign:"
     )
-    alerts_page = st.Page(
-        "pages/alerts.py",
-        title="System alerts",
-        icon=":material/notification_important:",
-    )
-
-    search_page = st.Page("pages/search.py", title="Search", icon=":material/search:")
-    history_page = st.Page(
-        "pages/history.py", title="History", icon=":material/history:"
-    )
 
     if st.session_state.logged_in:
         pg = st.navigation(
             {
+                "Home": [home_page],
+                "Insights": [summary_page, campaigns_page],
                 "Account": [logout_page],
-                "Reports": [summary_page, campaigns_page, alerts_page],
-                "Tools": [search_page, history_page],
             }
         )
     else:

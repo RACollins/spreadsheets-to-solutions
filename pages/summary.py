@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from utils import clean_data
-from plot import plot_summary_scatter, plot_corr_heatmap
+from plot import summary_scatter, corr_heatmap
 
 
 def main():
@@ -36,14 +36,14 @@ def main():
         selected_column_y = st.selectbox("Y", non_cat_cols, key="scatter_y")
     with right_column:
         selected_column_color = st.selectbox("Colour", cat_cols, key="scatter_color")
-    fig = plot_summary_scatter(
+    fig = summary_scatter(
         df, selected_column_x, selected_column_y, selected_column_color
     )
     st.plotly_chart(fig)
 
     # Plot correlations between all columns
     corr_df = df[non_cat_cols].corr()
-    fig = plot_corr_heatmap(corr_df)
+    fig = corr_heatmap(corr_df)
     st.plotly_chart(fig)
 
 
