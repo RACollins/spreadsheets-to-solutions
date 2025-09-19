@@ -18,10 +18,10 @@ def plot_summary_scatter(
 
 def plot_corr_heatmap(corr_df):
     fig = px.imshow(
-        corr_df,
+        corr_df.iloc[4:, 4:],
         labels=dict(x="X", y="Y", color="Correlation"),
-        x=corr_df.columns,
-        y=corr_df.columns,
+        x=corr_df.columns[4:],
+        y=corr_df.columns[4:],
         zmin=-1,
         zmax=1,
         color_continuous_scale="RdBu",
