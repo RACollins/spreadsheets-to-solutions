@@ -28,8 +28,13 @@ def login():
                 st.session_state["password_correct"] = True
                 st.session_state["logged_in"] = True
                 del st.session_state["password"]  # don't keep password in session
+
+                # Purely cosmetic
+                with st.spinner("Logging in...", show_time=False):
+                    time.sleep(2)
                 st.success("Logged in successfully")
                 time.sleep(1)
+
                 st.rerun()
             else:
                 st.error("Password incorrect")
