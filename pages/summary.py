@@ -4,7 +4,7 @@ from utils import clean_data
 from plot import plot_summary_scatter, plot_corr_heatmap
 
 
-def summary():
+def main():
     st.title("Summary")
 
     df = clean_data(pd.read_csv("data/marketing_data.csv"))
@@ -45,10 +45,6 @@ def summary():
     corr_df = df[non_cat_cols].corr()
     fig = plot_corr_heatmap(corr_df)
     st.plotly_chart(fig)
-
-
-def main():
-    summary()
 
 
 if __name__ == "__main__":

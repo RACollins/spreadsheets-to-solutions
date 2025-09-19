@@ -25,8 +25,8 @@ def main():
         icon=":material/person:",
         default=True,
     )
-    bugs_page = st.Page(
-        "pages/bugs.py", title="Bug reports", icon=":material/bug_report:"
+    campaigns_page = st.Page(
+        "pages/campaigns.py", title="Campaigns", icon=":material/campaign:"
     )
     alerts_page = st.Page(
         "pages/alerts.py",
@@ -43,7 +43,7 @@ def main():
         pg = st.navigation(
             {
                 "Account": [logout_page],
-                "Reports": [summary_page, bugs_page, alerts_page],
+                "Reports": [summary_page, campaigns_page, alerts_page],
                 "Tools": [search_page, history_page],
             }
         )

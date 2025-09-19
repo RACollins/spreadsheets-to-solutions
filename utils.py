@@ -1,7 +1,9 @@
 import pandas as pd
 from sklearn.impute import KNNImputer
+import streamlit as st
 
 
+@st.cache_data(ttl=3600, show_spinner=False)
 def clean_data(df):
     # Remove leading and trailing spaces from column names
     df.columns = df.columns.str.strip()
