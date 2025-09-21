@@ -30,12 +30,15 @@ def main():
     campaigns_page = st.Page(
         "pages/campaigns.py", title="Campaigns", icon=":material/campaign:"
     )
+    products_page = st.Page(
+        "pages/products.py", title="Products", icon=":material/shopping_bag:"
+    )
 
     if st.session_state.logged_in:
         pg = st.navigation(
             {
                 "Home": [home_page],
-                "Insights": [summary_page, campaigns_page],
+                "Insights": [summary_page, campaigns_page, products_page],
                 "Account": [logout_page],
             }
         )
