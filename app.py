@@ -19,13 +19,14 @@ def main():
     login_page = st.Page("pages/login.py", title="Log in", icon=":material/login:")
     logout_page = st.Page("pages/logout.py", title="Log out", icon=":material/logout:")
 
-    home_page = st.Page("pages/home.py", title="Home", icon=":material/home:")
+    home_page = st.Page(
+        "pages/home.py", title="Home", icon=":material/home:", default=True
+    )
 
     summary_page = st.Page(
         "pages/summary.py",
         title="Summary",
         icon=":material/analytics:",
-        default=True,
     )
     campaigns_page = st.Page(
         "pages/campaigns.py", title="Campaigns", icon=":material/campaign:"
