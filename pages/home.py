@@ -22,8 +22,8 @@ def main():
         """
     🎯 **Welcome to Marketing Magic!** 
     
-    Your comprehensive marketing analytics dashboard designed to unlock the power of your customer data. 
-    Dive deep into campaign performance, product insights, and customer behavior patterns with our 
+    Your comprehensive marketing analytics dashboard designed to unlock the power of your data. 
+    Drill down into campaign performance, product insights, and customer behavior patterns with our 
     intuitive visualizations and data-driven recommendations.
     """
     )
